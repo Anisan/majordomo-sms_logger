@@ -6,11 +6,11 @@
 &nbsp;
 <!-- source select -->
 
-
-
 <ul class="nav nav-tabs">
  <li [#if DATA_SOURCE!="smslog" && DATA_SOURCE!=""#][#else#]class="active"[#endif#]><a href="?data_source=smslog"><#LANG_LOG#></a></li>
  <li [#if DATA_SOURCE=="smsdevices"#]class="active"[#endif#]><a href="?data_source=smsdevices"><#LANG_DEVICES#></a></li>
+ <li [#if DATA_SOURCE=="smsphones"#]class="active"[#endif#]><a href="?data_source=smsphones">Phones</a></li>
+ <li [#if DATA_SOURCE=="smsactions"#]class="active"[#endif#]><a href="?data_source=smsactions">Actions</a></li>
 </ul><br>
 <!-- / source select -->
 [#endif SET_DATASOURCE#]
@@ -32,57 +32,60 @@
  [#endif VIEW_MODE#]
  <!-- / table smslog view -->
  [#endif DATA_SOURCE#]
+ 
  <!-- action usual -->
- [#if DATA_SOURCE="gpslocations"#]
- <!-- table gpslocations search -->
- [#if VIEW_MODE="search_gpslocations" || VIEW_MODE=""#]
-  [#inc gpslocations_search_admin.html#]
+ [#if DATA_SOURCE="smsdevices"#]
+ <!-- table smsdevices search -->
+ [#if VIEW_MODE="search_smsdevices" || VIEW_MODE=""#]
+  [#inc smsdevices_search_admin.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpslocations search -->
- <!-- table gpslocations edit -->
- [#if VIEW_MODE="edit_gpslocations"#]
-   [#inc gpslocations_edit.html#]
+ <!-- / table smsdevices search -->
+ <!-- table smsdevices edit -->
+ [#if VIEW_MODE="edit_smsdevices"#]
+   [#inc smsdevices_edit.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpslocations edit -->
- <!-- table gpslocations view --> 
- [#if VIEW_MODE="view_gpslocations"#]
-   [#inc gpslocations_view.html#]
+ <!-- / table smsdevices edit -->
+ <!-- table smsdevices view --> 
+ [#if VIEW_MODE="view_smsdevices"#]
+   [#inc smsdevices_view.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpslocations view -->
+ <!-- / table smsdevices view -->
  [#endif DATA_SOURCE#]
- <!-- action usual -->
- [#if DATA_SOURCE="gpsdevices"#]
- <!-- table gpsdevices search -->
- [#if VIEW_MODE="search_gpsdevices" || VIEW_MODE=""#]
-  [#inc gpsdevices_search_admin.html#]
+ 
+  <!-- action usual -->
+ [#if DATA_SOURCE="smsphones"#]
+ <!-- table smsphones search -->
+ [#if VIEW_MODE="search_smsphones" || VIEW_MODE=""#]
+  [#inc smsphones_search_admin.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsdevices search -->
- <!-- table gpsdevices edit -->
- [#if VIEW_MODE="edit_gpsdevices"#]
-   [#inc gpsdevices_edit.html#]
+ <!-- / table smsphones search -->
+ <!-- table smsphones edit -->
+ [#if VIEW_MODE="edit_smsphones"#]
+   [#inc smsphones_edit.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsdevices edit -->
- <!-- table gpsdevices view --> 
- [#if VIEW_MODE="view_gpsdevices"#]
-   [#inc gpsdevices_view.html#]
+ <!-- / table smsphones edit -->
+ <!-- table smsphones view --> 
+ [#if VIEW_MODE="view_smsphones"#]
+   [#inc smsphones_view.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsdevices view -->
+ <!-- / table smsphones view -->
  [#endif DATA_SOURCE#]
- <!-- action usual -->
- [#if DATA_SOURCE="gpsactions"#]
- <!-- table gpsactions search -->
- [#if VIEW_MODE="search_gpsactions" || VIEW_MODE=""#]
-  [#inc gpsactions_search_admin.html#]
+
+  <!-- action usual -->
+ [#if DATA_SOURCE="smsactions"#]
+ <!-- table smsactions search -->
+ [#if VIEW_MODE="search_smsactions" || VIEW_MODE=""#]
+  [#inc smsactions_search_admin.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsactions search -->
- <!-- table gpsactions edit -->
- [#if VIEW_MODE="edit_gpsactions"#]
-   [#inc gpsactions_edit.html#]
+ <!-- / table smsactions search -->
+ <!-- table smsactions edit -->
+ [#if VIEW_MODE="edit_smsactions"#]
+   [#inc smsactions_edit.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsactions edit -->
- <!-- table gpsactions view --> 
- [#if VIEW_MODE="view_gpsactions"#]
-   [#inc gpsactions_view.html#]
+ <!-- / table smsactions edit -->
+ <!-- table smsactions view --> 
+ [#if VIEW_MODE="view_smsactions"#]
+   [#inc smsactions_view.html#]
  [#endif VIEW_MODE#]
- <!-- / table gpsactions view -->
+ <!-- / table smsactions view -->
  [#endif DATA_SOURCE#]

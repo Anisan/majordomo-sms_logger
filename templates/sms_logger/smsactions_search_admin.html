@@ -1,0 +1,70 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+
+<!-- table smsactions search -->
+
+<a href="?view_mode=edit_smsactions&data_source=<#DATA_SOURCE#>" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> <#LANG_ADD_NEW_RECORD#></a>
+<br><br>
+
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_smsactions" style="padding:0px">
+<table class="table table-striped">
+<thead>
+<tr>
+ <td>
+ <b>Title</b>
+ </td>
+[#if !IS_SET_PHONE_ID#]
+ <td>
+ <b><#LANG_USER#></b>
+ </td>
+[#endif IS_SET_PHONE_ID#]
+ <td>
+ <b><#LANG_EXECUTED#></b>
+ </td>
+<td >&nbsp;</td>
+</tr>
+</thead>
+<tbody>
+[#begin RESULT#]
+<tr >
+ <td>
+   [#TITLE#]
+ </td>
+ <td>
+   [#PHONE_TITLE#]
+ </td>
+ <td>
+  [#if EXECUTED!=""#]
+   [#EXECUTED#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td >
+  
+  [#if "<#ACTION#>"=="admin"#]
+ 
+   <a class="btn btn-default btn-sm" href="?data_source=<#DATA_SOURCE#>&view_mode=edit_smsactions&id=[#ID#]"><i class="glyphicon glyphicon-pencil"></i></a>
+  
+    <a class="btn btn-default btn-sm" href="?data_source=<#DATA_SOURCE#>&view_mode=delete_smsactions&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><i class="glyphicon glyphicon-remove"></i></a>
+   
+  [#endif ACTION#]
+ 
+ </td>
+</tr>
+[#end RESULT#]
+</tbody>
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_smsactions">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<div class="alert alert-danger"><#LANG_NO_RECORDS_FOUND#></div>
+[#endif RESULT#]
+<!-- / results -->
+

@@ -46,7 +46,7 @@
   if (!$sortby_sms_log) $sortby_sms_log="sms_log.ID DESC";
   $out['SORTBY']=$sortby_sms_log;
   // SEARCH RESULTS
-  $res=SQLSelect("SELECT sms_log.*, sms_devices.TITLE as DEVICE_TITLE FROM sms_log LEFT JOIN sms_devices ON sms_devices.ID=sms_log.DEVICE_ID WHERE  $qry ORDER BY ".$sortby_sms_log);
+  $res=SQLSelect("SELECT sms_log.*, sms_devices.TITLE as DEVICE_TITLE, sms_phones.TITLE as PHONE_TITLE FROM sms_log LEFT JOIN sms_devices ON sms_devices.ID=sms_log.DEVICE_ID LEFT JOIN sms_phones ON sms_phones.ID=sms_log.PHONE_ID WHERE  $qry ORDER BY ".$sortby_sms_log);
   if ($res[0]['ID']) {
    paging($res, 50, $out); // search result paging
    colorizeArray($res);

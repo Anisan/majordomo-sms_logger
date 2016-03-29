@@ -108,24 +108,6 @@ function run() {
   $out['ACTION']=$this->action;
   $out['DATA_SOURCE']=$this->data_source;
   $out['TAB']=$this->tab;
-  if (IsSet($this->device_id)) {
-   $out['IS_SET_DEVICE_ID']=1;
-  }
-  if (IsSet($this->location_id)) {
-   $out['IS_SET_LOCATION_ID']=1;
-  }
-  if (IsSet($this->user_id)) {
-   $out['IS_SET_USER_ID']=1;
-  }
-  if (IsSet($this->location_id)) {
-   $out['IS_SET_LOCATION_ID']=1;
-  }
-  if (IsSet($this->user_id)) {
-   $out['IS_SET_USER_ID']=1;
-  }
-  if (IsSet($this->script_id)) {
-   $out['IS_SET_SCRIPT_ID']=1;
-  }
   if ($this->single_rec) {
    $out['SINGLE_REC']=1;
   }
@@ -159,46 +141,46 @@ function admin(&$out) {
  if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
   $out['SET_DATASOURCE']=1;
  }
- if ($this->data_source=='gpslocations') {
-  if ($this->view_mode=='' || $this->view_mode=='search_gpslocations') {
-   $this->search_gpslocations($out);
+ if ($this->data_source=='smsphones') {
+  if ($this->view_mode=='' || $this->view_mode=='search_smsphones') {
+   $this->search_smsphones($out);
   }
-  if ($this->view_mode=='edit_gpslocations') {
-   $this->edit_gpslocations($out, $this->id);
+  if ($this->view_mode=='edit_smsphones') {
+   $this->edit_smsphones($out, $this->id);
   }
-  if ($this->view_mode=='delete_gpslocations') {
-   $this->delete_gpslocations($this->id);
-   $this->redirect("?data_source=gpslocations");
-  }
- }
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
-  $out['SET_DATASOURCE']=1;
- }
- if ($this->data_source=='gpsdevices') {
-  if ($this->view_mode=='' || $this->view_mode=='search_gpsdevices') {
-   $this->search_gpsdevices($out);
-  }
-  if ($this->view_mode=='edit_gpsdevices') {
-   $this->edit_gpsdevices($out, $this->id);
-  }
-  if ($this->view_mode=='delete_gpsdevices') {
-   $this->delete_gpsdevices($this->id);
-   $this->redirect("?data_source=gpsdevices");
+  if ($this->view_mode=='delete_smsphones') {
+   $this->delete_smsphones($this->id);
+   $this->redirect("?data_source=smsphones");
   }
  }
  if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
   $out['SET_DATASOURCE']=1;
  }
- if ($this->data_source=='gpsactions') {
-  if ($this->view_mode=='' || $this->view_mode=='search_gpsactions') {
-   $this->search_gpsactions($out);
+ if ($this->data_source=='smsdevices') {
+  if ($this->view_mode=='' || $this->view_mode=='search_smsdevices') {
+   $this->search_smsdevices($out);
   }
-  if ($this->view_mode=='edit_gpsactions') {
-   $this->edit_gpsactions($out, $this->id);
+  if ($this->view_mode=='edit_smsdevices') {
+   $this->edit_smsdevices($out, $this->id);
   }
-  if ($this->view_mode=='delete_gpsactions') {
-   $this->delete_gpsactions($this->id);
-   $this->redirect("?data_source=gpsactions");
+  if ($this->view_mode=='delete_smsdevices') {
+   $this->delete_smsdevices($this->id);
+   $this->redirect("?data_source=smsdevices");
+  }
+ }
+ if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
+  $out['SET_DATASOURCE']=1;
+ }
+ if ($this->data_source=='smsactions') {
+  if ($this->view_mode=='' || $this->view_mode=='search_smsactions') {
+   $this->search_smsactions($out);
+  }
+  if ($this->view_mode=='edit_smsactions') {
+   $this->edit_smsactions($out, $this->id);
+  }
+  if ($this->view_mode=='delete_smsactions') {
+   $this->delete_smsactions($this->id);
+   $this->redirect("?data_source=smsactions");
   }
  }
 }
@@ -239,83 +221,84 @@ function usual(&$out) {
   SQLExec("DELETE FROM sms_log WHERE ID='".$rec['ID']."'");
  }
 /**
-* gpslocations search
+* smsphones search
 *
 * @access public
 */
- function search_gpslocations(&$out) {
-  require(DIR_MODULES.$this->name.'/gpslocations_search.inc.php');
+ function search_smsphones(&$out) {
+  require(DIR_MODULES.$this->name.'/smsphones_search.inc.php');
  }
 /**
-* gpslocations edit/add
+* smsphones edit/add
 *
 * @access public
 */
- function edit_gpslocations(&$out, $id) {
-  require(DIR_MODULES.$this->name.'/gpslocations_edit.inc.php');
+ function edit_smsphones(&$out, $id) {
+  require(DIR_MODULES.$this->name.'/smsphones_edit.inc.php');
  }
 /**
-* gpslocations delete record
+* smsphones delete record
 *
 * @access public
 */
- function delete_gpslocations($id) {
-  $rec=SQLSelectOne("SELECT * FROM gpslocations WHERE ID='$id'");
+ function delete_smsphones($id) {
+  $rec=SQLSelectOne("SELECT * FROM sms_phones WHERE ID='$id'");
   // some action for related tables
-  SQLExec("DELETE FROM gpslocations WHERE ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_actions WHERE PHONE_ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_phones WHERE ID='".$rec['ID']."'");
  }
 /**
-* gpsdevices search
+* smsdevices search
 *
 * @access public
 */
- function search_gpsdevices(&$out) {
-  require(DIR_MODULES.$this->name.'/gpsdevices_search.inc.php');
+ function search_smsdevices(&$out) {
+  require(DIR_MODULES.$this->name.'/smsdevices_search.inc.php');
  }
 /**
-* gpsdevices edit/add
+* smsdevices edit/add
 *
 * @access public
 */
- function edit_gpsdevices(&$out, $id) {
-  require(DIR_MODULES.$this->name.'/gpsdevices_edit.inc.php');
+ function edit_smsdevices(&$out, $id) {
+  require(DIR_MODULES.$this->name.'/smsdevices_edit.inc.php');
  }
 /**
-* gpsdevices delete record
+* smsdevices delete record
 *
 * @access public
 */
- function delete_gpsdevices($id) {
-  $rec=SQLSelectOne("SELECT * FROM gpsdevices WHERE ID='$id'");
+ function delete_smsdevices($id) {
+  $rec=SQLSelectOne("SELECT * FROM sms_devices WHERE ID='$id'");
   // some action for related tables
-  SQLExec("DELETE FROM smslog WHERE DEVICE_ID='".$rec['ID']."'");
-  SQLExec("DELETE FROM gpsdevices WHERE ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms+log WHERE DEVICE_ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_devices WHERE ID='".$rec['ID']."'");
  }
 /**
-* gpsactions search
+* smsactions search
 *
 * @access public
 */
- function search_gpsactions(&$out) {
-  require(DIR_MODULES.$this->name.'/gpsactions_search.inc.php');
+ function search_smsactions(&$out) {
+  require(DIR_MODULES.$this->name.'/smsactions_search.inc.php');
  }
 /**
-* gpsactions edit/add
+* smsactions edit/add
 *
 * @access public
 */
- function edit_gpsactions(&$out, $id) {
-  require(DIR_MODULES.$this->name.'/gpsactions_edit.inc.php');
+ function edit_smsactions(&$out, $id) {
+  require(DIR_MODULES.$this->name.'/smsactions_edit.inc.php');
  }
 /**
-* gpsactions delete record
+* smsactions delete record
 *
 * @access public
 */
- function delete_gpsactions($id) {
-  $rec=SQLSelectOne("SELECT * FROM gpsactions WHERE ID='$id'");
+ function delete_smsactions($id) {
+  $rec=SQLSelectOne("SELECT * FROM sms_actions WHERE ID='$id'");
   // some action for related tables
-  SQLExec("DELETE FROM gpsactions WHERE ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_actions WHERE ID='".$rec['ID']."'");
  }
 /**
 * Install
@@ -337,6 +320,8 @@ function usual(&$out) {
  function uninstall() {
   SQLExec('DROP TABLE IF EXISTS sms_log');
   SQLExec('DROP TABLE IF EXISTS sms_devices');
+  SQLExec('DROP TABLE IF EXISTS sms_phones');
+  SQLExec('DROP TABLE IF EXISTS sms_actions');
   parent::uninstall();
  }
 /**
@@ -354,8 +339,8 @@ sms_devices - Devices
   $data = <<<EOD
  sms_log: ID int(10) unsigned NOT NULL auto_increment
  sms_log: DEVICE_ID int(10) unsigned NOT NULL
+ sms_log: PHONE_ID int(10) unsigned NOT NULL
  sms_log: ADDED datetime
- sms_log: PHONE varchar(30) NOT NULL DEFAULT ''
  sms_log: TEXT varchar(255) NOT NULL DEFAULT ''
  sms_log: INDEX (DEVICE_ID)
  
@@ -364,6 +349,19 @@ sms_devices - Devices
  sms_devices: ADDED datetime
  sms_devices: DEVICEID varchar(255) NOT NULL DEFAULT ''
  sms_devices: INDEX (DEVICEID)
+ 
+ sms_phones: ID int(10) unsigned NOT NULL auto_increment
+ sms_phones: TITLE varchar(255) NOT NULL DEFAULT ''
+ sms_phones: ADDED datetime
+ sms_phones: NUMBER varchar(255) NOT NULL DEFAULT ''
+ sms_phones: INDEX (NUMBER)
+ 
+ sms_actions: ID int(10) unsigned NOT NULL auto_increment
+ sms_actions: TITLE varchar(255) NOT NULL DEFAULT ''
+ sms_actions: ADDED datetime
+ sms_actions: PHONE_ID int(10) unsigned NOT NULL
+ sms_actions: NUMBER varchar(255) NOT NULL DEFAULT ''
+ sms_actions: CODE text
  
 EOD;
   parent::dbInstall($data);
