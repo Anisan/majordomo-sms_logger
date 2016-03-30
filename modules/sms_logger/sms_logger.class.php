@@ -246,6 +246,7 @@ function usual(&$out) {
   // some action for related tables
   SQLExec("DELETE FROM sms_actions WHERE PHONE_ID='".$rec['ID']."'");
   SQLExec("DELETE FROM sms_phones WHERE ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_log WHERE PHONE_ID='".$rec['ID']."'");
  }
 /**
 * smsdevices search
@@ -271,7 +272,7 @@ function usual(&$out) {
  function delete_smsdevices($id) {
   $rec=SQLSelectOne("SELECT * FROM sms_devices WHERE ID='$id'");
   // some action for related tables
-  SQLExec("DELETE FROM sms+log WHERE DEVICE_ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM sms_log WHERE DEVICE_ID='".$rec['ID']."'");
   SQLExec("DELETE FROM sms_devices WHERE ID='".$rec['ID']."'");
  }
 /**
