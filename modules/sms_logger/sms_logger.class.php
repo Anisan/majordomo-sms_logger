@@ -138,9 +138,6 @@ function admin(&$out) {
    $this->redirect("?data_source=smslog");
   }
  }
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
-  $out['SET_DATASOURCE']=1;
- }
  if ($this->data_source=='smsphones') {
   if ($this->view_mode=='' || $this->view_mode=='search_smsphones') {
    $this->search_smsphones($out);
@@ -153,9 +150,6 @@ function admin(&$out) {
    $this->redirect("?data_source=smsphones");
   }
  }
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
-  $out['SET_DATASOURCE']=1;
- }
  if ($this->data_source=='smsdevices') {
   if ($this->view_mode=='' || $this->view_mode=='search_smsdevices') {
    $this->search_smsdevices($out);
@@ -167,9 +161,6 @@ function admin(&$out) {
    $this->delete_smsdevices($this->id);
    $this->redirect("?data_source=smsdevices");
   }
- }
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
-  $out['SET_DATASOURCE']=1;
  }
  if ($this->data_source=='smsactions') {
   if ($this->view_mode=='' || $this->view_mode=='search_smsactions') {

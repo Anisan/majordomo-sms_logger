@@ -1,7 +1,28 @@
 <!--#
  @version 0.2
 #-->
-
+<form action="?" method="post" name="frmList_smslog" style="padding:0px">
+ <table border="0">
+ <tbody><tr>
+    <td>
+        <select class="form-control" name="device_id" onchange="document.frmList_smslog.submit();">
+            <option value="0">Фильтр по Device (Все)</option>
+            [#begin DEVICE_ID_OPTIONS#]
+            <option value="[#ID#]"[#if ID="<#DEVICE_ID#>"#] selected[#endif#]>[#TITLE#]
+            [#end DEVICE_ID_OPTIONS#]
+        </select>	
+    </td>	
+    <td>&nbsp;</td>
+    <td>	
+        <select class="form-control" name="phone_id" onchange="document.frmList_smslog.submit();">
+            <option value="0">Фильтр по Phone (Все)</option>
+            [#begin PHONE_ID_OPTIONS#]
+                <option value="[#ID#]"[#if ID="<#PHONE_ID#>"#] selected[#endif#]>[#TITLE#]
+            [#end PHONE_ID_OPTIONS#]
+        </select>	
+    </td>
+ </tr>
+</tbody></table>
 <table width=100% border=0><tr>
 <td valign=top>
 <!-- results -->
@@ -21,7 +42,6 @@
 [#endif PAGES#]
 <!-- / paging -->
 <!-- search results (list) -->
-<form action="?" method="post" name="frmList_smslog" style="padding:0px">
 <table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
 <tr>
  <td align=center bgcolor="#AAAAAA">
@@ -59,7 +79,7 @@
   [#endif#]
  </td>
  <td
-   align=center
+   align=left
    bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
   [#if TEXT!=""#]
    [#TEXT#]
@@ -89,8 +109,8 @@
 [#end RESULT#]
 </table>
 <input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
-<input type="hidden" name="view_mode" value="multiple_smslog">
-</form>
+<input type="hidden" name="view_mode" value="search_smslog">
+
 <!-- / search results (list) -->
 <!-- paging -->
 [#if PAGES#]
@@ -113,3 +133,4 @@
 [#endif RESULT#]
 <!-- / results -->
 </td></tr></table>
+</form>

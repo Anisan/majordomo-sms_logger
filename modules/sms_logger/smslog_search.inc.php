@@ -9,18 +9,17 @@
   }
   $qry="1";
   // search filters
-  if (IsSet($this->device_id)) {
-   $device_id=$this->device_id;
-   $qry.=" AND DEVICE_ID='".$this->device_id."'";
-  } else {
-   global $device_id;
-  }
-  if (IsSet($this->location_id)) {
-   $location_id=$this->location_id;
-   $qry.=" AND LOCATION_ID='".$this->location_id."'";
-  } else {
-   global $location_id;
-  }
+  global $device_id;
+  if ($device_id) {
+   $qry.=" AND DEVICE_ID='".(int)$device_id."'";
+   $out['DEVICE_ID']=(int)$device_id;
+  } 
+  
+  global $phone_id;
+  if ($phone_id) {
+   $qry.=" AND PHONE_ID='".(int)$phone_id."'";
+   $out['PHONE_ID']=(int)$phone_id;
+  } 
   // QUERY READY
   global $save_qry;
   if ($save_qry) {
@@ -58,4 +57,6 @@
    }
    $out['RESULT']=$res;
   }
+  $out['DEVICE_ID_OPTIONS']=SQLSelect("SELECT * FROM sms_devices ORDER BY TITLE");
+  $out['PHONE_ID_OPTIONS']=SQLSelect("SELECT * FROM sms_phones ORDER BY TITLE");
 ?>
